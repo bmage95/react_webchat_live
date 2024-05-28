@@ -5,18 +5,12 @@ const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
-  }
-});
+const io = socketIo(server);
 
 let messages = [];
 
-app.use(cors({
-  origin: "http://localhost:3000"
-}));
+// Allow all origins for CORS
+app.use(cors());
 
 io.on('connection', (socket) => {
   console.log('New client connected');
